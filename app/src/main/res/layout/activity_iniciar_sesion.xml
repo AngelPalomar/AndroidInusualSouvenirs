@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IniciarSesion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/insouv_logo"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido a Inusual Souvenirs"
+            android:textColor="@color/is_dark"
+            android:textSize="33sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión"
+            android:textColor="@color/is_dark"
+            android:textSize="24sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Todos los campos son requeridos"
+            android:textColor="@color/is_dark"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/ly_login_formulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp">
+
+                <EditText
+                    android:id="@+id/ed_credencial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo electrónico o teléfono"
+                    android:background="@drawable/edit_text_style"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp">
+
+                <EditText
+                    android:id="@+id/ed_contrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    android:background="@drawable/edit_text_style"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_login"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/is_primary"
+            android:indeterminateTintMode="src_atop"/>
+
+        <Button
+            android:id="@+id/btn_ingresar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ingresar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/is_primary"
+            android:onClick="iniciarSesion"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btn_ir_a_registro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿no tienes una cuenta? ¡Regístrate aquí!"
+            android:textColor="@android:color/white"
+            android:onClick="registrarse"
+            android:backgroundTint="@color/is_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="12" >
+
+            <Button
+                android:id="@+id/btn_registro_facebook"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="registrarse con facebook"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#3b5998" />
+
+            <Button
+                android:id="@+id/btn_registro_google"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="registrarse con google"
+                android:textColor="#726E75"
+                android:backgroundTint="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

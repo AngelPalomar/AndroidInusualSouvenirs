@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CarritoDeCompras">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/carrito_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="@android:color/white"
+            app:title="Carrito de compras"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_weight="3"
+                    android:layout_width="1dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/regadera_invertida"
+                    android:onClick="verProducto"/>
+
+                <LinearLayout
+                    android:layout_weight="9"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Regadera elevada a la -1"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Regadera invertida ideal para regar tus plantas." />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="12">
+
+                        <EditText
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="1"
+                            android:inputType="number"
+                            android:background="@drawable/edit_text_style" />
+
+                        <ImageButton
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#99B2DD"
+                            android:src="@drawable/add"/>
+
+                        <TextView
+                            android:layout_weight="9"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:text="$ 349.98"
+                            android:textSize="24sp"
+                            android:textAlignment="textEnd" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Fin producto 1-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12" >
+
+                <ImageView
+                    android:layout_weight="3"
+                    android:layout_width="1dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/juego_te"
+                    android:onClick="verProducto"/>
+
+                <LinearLayout
+                    android:layout_weight="9"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Juego de té alargado (Tetera y taza)"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Juego de té ampliado para más café." />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="12">
+
+                        <EditText
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="1"
+                            android:inputType="number"
+                            android:background="@drawable/edit_text_style" />
+
+                        <ImageButton
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#99B2DD"
+                            android:src="@drawable/add"/>
+
+                        <TextView
+                            android:layout_weight="9"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:text="$ 419.00"
+                            android:textSize="24sp"
+                            android:textAlignment="textEnd" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Fin productos-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Total"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="$ 768.98"
+                    android:textSize="24sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Continuar compra"
+                android:backgroundTint="#99B2DD"
+                android:textColor="@android:color/white"
+                android:onClick="confirmarCompra"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
