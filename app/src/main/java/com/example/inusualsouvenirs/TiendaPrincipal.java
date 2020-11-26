@@ -47,7 +47,7 @@ public class TiendaPrincipal extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_categorias, R.id.nav_cuenta, R.id.nav_lista_deseos, R.id.nav_mis_compras)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -70,18 +70,10 @@ public class TiendaPrincipal extends AppCompatActivity {
                 startActivity(new Intent(TiendaPrincipal.this, CarritoDeCompras.class));
                 return true;
 
-            case R.id.ver_perfil:
-                startActivity(new Intent(TiendaPrincipal.this, MiPerfil.class));
-                return true;
-
             case R.id.cerrar_sesion:
 
                 //Cerrar sesión
                 logout();
-                return true;
-
-            case R.id.ver_lista_de_deseos:
-                startActivity(new Intent(TiendaPrincipal.this, ListaDeDeseos.class));
                 return true;
 
             default:
@@ -97,22 +89,7 @@ public class TiendaPrincipal extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
-        alerta.setTitle("Cerrar la sesión")
-                .setMessage("¿Deseas cerrar sesión?")
-                .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        logout();
-                        startActivity(new Intent(TiendaPrincipal.this, IniciarSesion.class));
-                    }
-                })
-                .setNegativeButton("No, quedarse", null)
-                .setIcon(R.drawable.ic_baseline_warning_24)
-                .setCancelable(false)
-                .show();
-    }
+    public void onBackPressed() { }
 
     public void logout() {
         sharedPreferences = getSharedPreferences("inusualapp", MODE_PRIVATE);

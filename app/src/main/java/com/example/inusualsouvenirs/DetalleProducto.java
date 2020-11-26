@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.inusualsouvenirs.ui.ListaDeDeseos;
+
 public class DetalleProducto extends AppCompatActivity {
 
     @Override

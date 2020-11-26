@@ -17,8 +17,6 @@
             android:label="@string/title_activity_tienda_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CheckoutProcesoPago" />
-        <activity android:name=".ListaDeDeseos" />
-        <activity android:name=".MiPerfil" />
         <activity android:name=".DetalleProducto" />
         <activity android:name=".CarritoDeCompras" />
         <activity android:name=".Registro" />

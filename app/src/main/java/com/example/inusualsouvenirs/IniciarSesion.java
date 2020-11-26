@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.inusualsouvenirs.utils.Helper;
 
 import org.json.JSONObject;
 
@@ -180,7 +181,7 @@ public class IniciarSesion extends AppCompatActivity {
                                 .setMessage(error.toString())
                                 .setCancelable(false)
                                 .setNeutralButton("Aceptar", null)
-                                .setIcon(R.drawable.borrar)
+                                .setIcon(R.drawable.ic_baseline_error_24)
                                 .show();
                     }
                 }

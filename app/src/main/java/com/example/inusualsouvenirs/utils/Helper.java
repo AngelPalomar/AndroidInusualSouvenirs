@@ -1,4 +1,4 @@
-package com.example.inusualsouvenirs;
+package com.example.inusualsouvenirs.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

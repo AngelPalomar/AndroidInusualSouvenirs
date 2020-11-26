@@ -7,19 +7,32 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.inusualsouvenirs.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.inusualsouvenirs.ui.Inicio"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_inicio" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.inusualsouvenirs.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_categorias"
+        android:name="com.example.inusualsouvenirs.ui.Categorias"
+        android:label="Categorías"
+        tools:layout="@layout/fragment_categorias" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.inusualsouvenirs.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_cuenta"
+        android:name="com.example.inusualsouvenirs.ui.Cuenta"
+        android:label="Mi cuenta"
+        tools:layout="@layout/fragment_categorias" />
+
+    <fragment
+        android:id="@+id/nav_lista_deseos"
+        android:name="com.example.inusualsouvenirs.ui.ListaDeDeseos"
+        android:label="Lista de deseos"
+        tools:layout="@layout/fragment_lista_de_deseos" />
+
+    <fragment
+        android:id="@+id/nav_mis_compras"
+        android:name="com.example.inusualsouvenirs.ui.MisCompras"
+        android:label="Mis compras"
+        tools:layout="@layout/fragment_mis_compras" />
+
 </navigation>

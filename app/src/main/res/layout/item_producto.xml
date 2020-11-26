@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="12">
+
+    <ImageView
+        android:id="@+id/imgv_producto"
+        android:layout_width="1dp"
+        android:layout_height="130dp"
+        android:layout_weight="4"/>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nombre_producto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre producto"
+            android:textSize="22sp"
+            android:textColor="@color/is_dark" />
+
+        <TextView
+            android:id="@+id/tv_precio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$00.00"
+            android:textSize="18sp"
+            android:textColor="@color/is_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="12"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/btn_anadir_carrito"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:text="Agregar"
+                android:textColor="@android:color/white"
+                android:drawableStart="@drawable/add_shopping"
+                android:backgroundTint="@color/is_primary" />
+
+            <Button
+                android:id="@+id/btn_comprar"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:text="Comprar"
+                android:textColor="@android:color/white"
+                android:drawableStart="@drawable/attach_money"
+                android:backgroundTint="@color/is_secondary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
