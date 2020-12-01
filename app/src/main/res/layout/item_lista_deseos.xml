@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="1dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
+        android:layout_weight="6"
         android:padding="5dp"
         android:orientation="vertical">
 
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre producto"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textColor="@color/is_dark" />
 
         <TextView
@@ -38,20 +38,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="12"
-            android:layout_marginTop="10dp">
+            android:weightSum="12" >
 
-            <Button
-                android:id="@+id/btn_anadir_carrito"
+            <TextView
                 android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:text="Agregar"
-                android:textColor="@android:color/white"
-                android:drawableStart="@drawable/add_shopping"
-                android:backgroundTint="@color/is_primary" />
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:text="Existencias: "
+                android:textSize="18sp"
+                android:textColor="@color/is_background" />
+
+            <TextView
+                android:id="@+id/tv_existencias"
+                android:layout_width="1dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/is_success" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_eliminar_item_deseos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_clear_24"
+            android:scaleType="fitCenter"
+            android:backgroundTint="#00000000" />
 
     </LinearLayout>
 

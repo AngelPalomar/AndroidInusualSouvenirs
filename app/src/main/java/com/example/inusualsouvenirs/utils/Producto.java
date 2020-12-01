@@ -1,12 +1,16 @@
 package com.example.inusualsouvenirs.utils;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
     String id;
     String nombre;
     float precio;
     int existencias;
     String imagen;
     String categoria;
+    String informacion;
+    String descripcion;
 
     public String getId() {
         return id;
@@ -54,5 +58,21 @@ public class Producto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

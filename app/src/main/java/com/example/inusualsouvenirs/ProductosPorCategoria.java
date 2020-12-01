@@ -1,15 +1,13 @@
-package com.example.inusualsouvenirs.ui;
+package com.example.inusualsouvenirs;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,7 +15,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.inusualsouvenirs.R;
 import com.example.inusualsouvenirs.adapters.ListaProductosAdapter;
 import com.example.inusualsouvenirs.utils.Producto;
 
@@ -26,16 +23,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class Inicio extends Fragment {
+public class ProductosPorCategoria extends AppCompatActivity {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
+    private String categoria;
     private SwipeRefreshLayout swInicio;
     private ListView lvProductos;
     private List<Producto> productos;
@@ -43,40 +34,31 @@ public class Inicio extends Fragment {
     private RequestQueue conexionServ;
     private StringRequest peticionServ;
 
-    public Inicio() { }
-
-    public static Inicio newInstance(String param1, String param2) {
-        Inicio fragment = new Inicio();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        setContentView(R.layout.activity_productos_por_categoria);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Guardar vista principal
-        final View rootView = inflater.inflate(R.layout.fragment_inicio, container, false);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.producto_categoria_toolbar);
+        setSupportActionBar(toolbar);
 
-        swInicio = rootView.findViewById(R.id.swp_inicio);
-        lvProductos = rootView.findViewById(R.id.lv_productos);
+        //Obtengo la categoria que se seleccionó
+        categoria = getIntent().getStringExtra("categoria");
+
+        //Cambio título de la barra de navegación
+        toolbar.setTitle(categoria);
+
+        //Inicializo componentes
         productos = new ArrayList<>();
+        swInicio = findViewById(R.id.swp_productos_categorias);
+        lvProductos = findViewById(R.id.lv_productos);
+        adapter = new ListaProductosAdapter(ProductosPorCategoria.this, productos);
 
-        adapter = new ListaProductosAdapter(getActivity(), productos);
+        //Asigno adaptador de la lista
         lvProductos.setAdapter(adapter);
 
-        conexionServ = Volley.newRequestQueue(getActivity());
+        //Inicio la petición Volley
+        conexionServ = Volley.newRequestQueue(ProductosPorCategoria.this);
 
         //Recarga de la lista
         swInicio.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,8 +76,6 @@ public class Inicio extends Fragment {
                 cargarListaProductos();
             }
         });
-
-        return rootView;
     }
 
     private void cargarListaProductos() {
@@ -106,7 +86,8 @@ public class Inicio extends Fragment {
 
         peticionServ = new StringRequest(
                 Request.Method.GET,
-                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/listaProductos",
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/" +
+                        "listaProductos?category=" + categoria,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -114,7 +95,7 @@ public class Inicio extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
 
                             if (jsonObject.getInt("response_code") == 200) {
-                                JSONArray arrayProductos = jsonObject.getJSONArray("listaproductos");
+                                JSONArray arrayProductos = jsonObject.getJSONArray("productos_categoria");
 
                                 for (int i = 0; i < arrayProductos.length(); i++) {
                                     //JSONObject producto = arrayProductos.getJSONObject(i);
@@ -138,7 +119,7 @@ public class Inicio extends Fragment {
                             }
                         } catch (Exception e) {
                             swInicio.setRefreshing(false);
-                            new AlertDialog.Builder(getActivity())
+                            new AlertDialog.Builder(ProductosPorCategoria.this)
                                     .setTitle("Error inesperado")
                                     .setMessage("Verifique su conexión a internet")
                                     .setPositiveButton("Aceptar", null)
@@ -151,7 +132,7 @@ public class Inicio extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         swInicio.setRefreshing(false);
-                        new AlertDialog.Builder(getActivity())
+                        new AlertDialog.Builder(ProductosPorCategoria.this)
                                 .setTitle("Error inesperado")
                                 .setMessage("Error del servidor, vuevla a intentarlo.")
                                 .setPositiveButton("Aceptar", null)

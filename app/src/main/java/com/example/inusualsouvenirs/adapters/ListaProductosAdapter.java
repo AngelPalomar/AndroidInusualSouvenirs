@@ -2,6 +2,7 @@ package com.example.inusualsouvenirs.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.inusualsouvenirs.DetalleProducto;
 import com.example.inusualsouvenirs.R;
 import com.example.inusualsouvenirs.utils.Producto;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ListaProductosAdapter extends BaseAdapter {
@@ -50,18 +53,19 @@ public class ListaProductosAdapter extends BaseAdapter {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.item_producto, null);
             TextView tvNombreProducto = view.findViewById(R.id.tv_nombre_producto);
-            TextView tvPrecio = view.findViewById(R.id.tv_precio);;
+            TextView tvPrecio = view.findViewById(R.id.tv_precio);
             ImageView imgvProducto = view.findViewById(R.id.imgv_producto);
             Button btnAnadirCarrito = view.findViewById(R.id.btn_anadir_carrito);
-            Button btnComprar = view.findViewById(R.id.btn_comprar);
 
+            //Evento para visualizar el detalle del producto
             imgvProducto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), productos.get(i).getId(), Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, DetalleProducto.class)
+                            .putExtra("Producto", (Serializable) productos.get(i))
+                    );
                 }
             });
-
 
             tvNombreProducto.setText(productos.get(i).getNombre());
             tvPrecio.setText(String.format("$%.2f", productos.get(i).getPrecio()));

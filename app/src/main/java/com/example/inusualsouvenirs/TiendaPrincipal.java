@@ -1,19 +1,18 @@
 package com.example.inusualsouvenirs;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -27,6 +26,11 @@ public class TiendaPrincipal extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor prefsEditor;
     private AppBarConfiguration mAppBarConfiguration;
+    private TextView drawerHeader;
+    private TextView drawerSubtitle;
+    private SharedPreferences prefs;
+    private String nombreUsuario;
+    private String correoUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +38,6 @@ public class TiendaPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_tienda_principal);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -53,6 +49,20 @@ public class TiendaPrincipal extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //Inicializar el header del drawer para cambiar datos
+        View headView = navigationView.getHeaderView(0);
+
+        drawerHeader = headView.findViewById(R.id.drawer_header);
+        drawerSubtitle = headView.findViewById(R.id.drawer_subtitle);
+
+        prefs = getSharedPreferences("inusualapp", MODE_PRIVATE);
+        nombreUsuario = prefs.getString("name", null) + " " + prefs.getString("lastname", null);
+        correoUsuario = String.valueOf(prefs.getString("email", null));
+
+        drawerHeader.setText(nombreUsuario);
+        drawerSubtitle.setText(correoUsuario);
+
     }
 
     @Override
