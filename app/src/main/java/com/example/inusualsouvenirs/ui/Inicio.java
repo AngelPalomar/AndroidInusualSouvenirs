@@ -1,6 +1,7 @@
 package com.example.inusualsouvenirs.ui;
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,9 @@ public class Inicio extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String apiKey;
+    private SharedPreferences prefs;
+
     private SwipeRefreshLayout swInicio;
     private ListView lvProductos;
     private List<Producto> productos;
@@ -68,6 +72,10 @@ public class Inicio extends Fragment {
                              Bundle savedInstanceState) {
         // Guardar vista principal
         final View rootView = inflater.inflate(R.layout.fragment_inicio, container, false);
+
+        //Obtengo API KEY de la sesión
+        prefs = getActivity().getSharedPreferences("inusualapp", getContext().MODE_PRIVATE);
+        apiKey = prefs.getString("key", null);
 
         swInicio = rootView.findViewById(R.id.swp_inicio);
         lvProductos = rootView.findViewById(R.id.lv_productos);
@@ -106,7 +114,7 @@ public class Inicio extends Fragment {
 
         peticionServ = new StringRequest(
                 Request.Method.GET,
-                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/listaProductos",
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/webServices/listaProductos?key=" + apiKey,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

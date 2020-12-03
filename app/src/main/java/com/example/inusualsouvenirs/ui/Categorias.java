@@ -2,6 +2,7 @@ package com.example.inusualsouvenirs.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -37,6 +38,9 @@ public class Categorias extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String apiKey;
+    private SharedPreferences prefs;
+
     private SwipeRefreshLayout swpCategorias;
     private ListView lvCategorias;
     private List<String> categList;
@@ -69,6 +73,10 @@ public class Categorias extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView =  inflater.inflate(R.layout.fragment_categorias, container, false);
+
+        //Obtengo API KEY de la sesión
+        prefs = getActivity().getSharedPreferences("inusualapp", getContext().MODE_PRIVATE);
+        apiKey = prefs.getString("key", null);
 
         conexionServ = Volley.newRequestQueue(getActivity());
         lvCategorias = rootView.findViewById(R.id.lv_categorias);
@@ -127,7 +135,7 @@ public class Categorias extends Fragment {
         //Petición GET al servicio
         peticionServ = new StringRequest(
                 Request.Method.GET,
-                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/getCategories",
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/webServices/getCategories?key=" + apiKey,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

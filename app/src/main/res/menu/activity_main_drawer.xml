@@ -18,15 +18,5 @@
             android:id="@+id/nav_lista_deseos"
             android:icon="@drawable/ic_baseline_bookmark_24"
             android:title="Lista de deseos" />
-
-        <item
-            android:id="@+id/nav_cuenta"
-            android:icon="@drawable/account_circle"
-            android:title="Mi cuenta" />
-
-        <item
-            android:id="@+id/nav_mis_compras"
-            android:icon="@drawable/ic_baseline_access_time_24"
-            android:title="Mis compras" />
     </group>
 </menu>

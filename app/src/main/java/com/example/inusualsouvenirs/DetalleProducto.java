@@ -31,7 +31,7 @@ public class DetalleProducto extends AppCompatActivity {
     private ImageView imgvProducto;
     private Button btnAnadirListaDeseos;
     private Producto producto;
-    private String idUsuario;
+    private String idUsuario, apiKey;
     private SharedPreferences prefs;
     private RequestQueue conexionServ;
     private StringRequest peticionServ;
@@ -55,6 +55,7 @@ public class DetalleProducto extends AppCompatActivity {
         //Obtengo datos locales
         prefs = getSharedPreferences("inusualapp", MODE_PRIVATE);
         idUsuario = prefs.getString("user_id", null);
+        apiKey = prefs.getString("key", null);
 
         //Obtengo el producto seleccionado desde la lista de productos
         producto = (Producto) getIntent().getSerializableExtra("Producto");
@@ -79,7 +80,8 @@ public class DetalleProducto extends AppCompatActivity {
         peticionServ = new StringRequest(
                 Request.Method.GET,
                 "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/" +
-                        "addProductWishListApp?user=" + idUsuario + "&product=" + producto.getId(),
+                        "addProductWishListApp?user=" + idUsuario + "&product=" + producto.getId() +
+                "&key=" + apiKey,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

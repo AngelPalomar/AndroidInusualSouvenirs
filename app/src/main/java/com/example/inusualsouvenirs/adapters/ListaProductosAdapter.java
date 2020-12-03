@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.inusualsouvenirs.DetalleProducto;
 import com.example.inusualsouvenirs.R;
 import com.example.inusualsouvenirs.utils.Producto;
@@ -44,7 +46,7 @@ public class ListaProductosAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @SuppressLint("DefaultLocale")

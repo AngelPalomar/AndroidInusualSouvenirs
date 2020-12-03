@@ -7,7 +7,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +38,11 @@ public class TiendaPrincipal extends AppCompatActivity {
     private SharedPreferences prefs;
     private String nombreUsuario;
     private String correoUsuario;
+    private String sesion;
+
+    /*Elementos de conexión remota*/
+    private RequestQueue conexionServ;
+    private StringRequest peticionServ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,9 @@ public class TiendaPrincipal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //Inicializa la conexión
+        conexionServ = Volley.newRequestQueue(TiendaPrincipal.this);
+
         //Inicializar el header del drawer para cambiar datos
         View headView = navigationView.getHeaderView(0);
 
@@ -59,6 +74,7 @@ public class TiendaPrincipal extends AppCompatActivity {
         prefs = getSharedPreferences("inusualapp", MODE_PRIVATE);
         nombreUsuario = prefs.getString("name", null) + " " + prefs.getString("lastname", null);
         correoUsuario = String.valueOf(prefs.getString("email", null));
+        sesion = String.valueOf(prefs.getString("session", null));
 
         drawerHeader.setText(nombreUsuario);
         drawerSubtitle.setText(correoUsuario);
@@ -102,6 +118,36 @@ public class TiendaPrincipal extends AppCompatActivity {
     public void onBackPressed() { }
 
     public void logout() {
+        //Servicio para borrar la sesión actual
+        peticionServ = new StringRequest(
+                Request.Method.GET,
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/index.php/" +
+                        "seguridad/salir?key=" + sesion,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            if (response.equals("OK")) {
+                                Toast.makeText(TiendaPrincipal.this, "A cerrado sesión", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(TiendaPrincipal.this, "No se pudo cerrar sesión", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(TiendaPrincipal.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(TiendaPrincipal.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        //Ejecuta la petición
+        conexionServ.add(peticionServ);
+
         sharedPreferences = getSharedPreferences("inusualapp", MODE_PRIVATE);
         prefsEditor = sharedPreferences.edit();
 

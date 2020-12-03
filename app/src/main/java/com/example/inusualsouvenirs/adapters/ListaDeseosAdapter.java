@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,12 @@ public class ListaDeseosAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.item_lista_deseos, null);
+            final String apiKey;
+            SharedPreferences prefs;
+
+            prefs = context.getSharedPreferences("inusualapp", context.MODE_PRIVATE);
+            apiKey = prefs.getString("key", null);
+
             ImageView imgProducto = view.findViewById(R.id.imgv_producto);
             TextView tvNombreProducto = view.findViewById(R.id.tv_nombre_producto);
             TextView tvPrecio = view.findViewById(R.id.tv_precio);
@@ -99,8 +106,9 @@ public class ListaDeseosAdapter extends BaseAdapter {
 
                     peticionServ = new StringRequest(
                             Request.Method.GET,
-                            "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/" +
-                                    "deleteItemWishListApp?user=" + idUsuario + "&product=" + productos.get(i).getId(),
+                            "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/webServices/" +
+                                    "deleteItemWishListApp?user=" + idUsuario + "&product=" + productos.get(i).getId() +
+                            "&key=" + apiKey,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {

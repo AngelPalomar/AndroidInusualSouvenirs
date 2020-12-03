@@ -57,8 +57,6 @@ public class IniciarSesion extends AppCompatActivity {
         pbLogin = findViewById(R.id.pb_login);
         btnIngresar = findViewById(R.id.btn_ingresar);
         btnIrARegistro = findViewById(R.id.btn_ir_a_registro);
-        btnRegistroFacebook = findViewById(R.id.btn_registro_facebook);
-        btnRegistroGoogle = findViewById(R.id.btn_registro_google);
 
         alerta = new AlertDialog.Builder(IniciarSesion.this);
         //Petición y conexión
@@ -96,8 +94,6 @@ public class IniciarSesion extends AppCompatActivity {
 
         btnIngresar.setEnabled(false);
         btnIrARegistro.setEnabled(false);
-        btnRegistroFacebook.setEnabled(false);
-        btnRegistroGoogle.setEnabled(false);
 
         /*Inicializamos la peticion
          * 1.- Tipo de envio
@@ -126,6 +122,8 @@ public class IniciarSesion extends AppCompatActivity {
                                 prefsEditor.putString("lastname", datosUsuario.getString("lastname"));
                                 prefsEditor.putString("phone", datosUsuario.getString("phone"));
                                 prefsEditor.putString("email", datosUsuario.getString("email"));
+                                prefsEditor.putString("key", datosUsuario.getString("api_key"));
+                                prefsEditor.putString("session", datosUsuario.getString("session"));
 
                                 //Guardo las variables
                                 prefsEditor.commit();
@@ -169,8 +167,6 @@ public class IniciarSesion extends AppCompatActivity {
 
                         btnIngresar.setEnabled(true);
                         btnIrARegistro.setEnabled(true);
-                        btnRegistroFacebook.setEnabled(true);
-                        btnRegistroGoogle.setEnabled(true);
                     }
                 },
 

@@ -40,7 +40,7 @@ public class ListaDeDeseos extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String idUsuario;
+    private String idUsuario, apiKey;
     private SharedPreferences prefs;
     private SwipeRefreshLayout swpListaDeseos;
     private ListView lvListaDeseos;
@@ -78,6 +78,7 @@ public class ListaDeDeseos extends Fragment {
         //Obtengo el id de usuario
         prefs = getActivity().getSharedPreferences("inusualapp", getContext().MODE_PRIVATE);
         idUsuario = prefs.getString("user_id", null);
+        apiKey = prefs.getString("key", null);
 
         //Conecto las vistas con los controladores
         swpListaDeseos = rootView.findViewById(R.id.swp_lista_deseos);
@@ -123,7 +124,8 @@ public class ListaDeDeseos extends Fragment {
         //Petición para obtener la lista
         peticionServ = new StringRequest(
                 Request.Method.GET,
-                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/getWishListApp?user=" + idUsuario,
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/webServices/" +
+                        "getWishListApp?user=" + idUsuario + "&key=" + apiKey,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

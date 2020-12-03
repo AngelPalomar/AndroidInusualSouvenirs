@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,6 +27,9 @@ import java.util.List;
 
 public class ProductosPorCategoria extends AppCompatActivity {
 
+    private String apiKey;
+    private SharedPreferences prefs;
+
     private String categoria;
     private SwipeRefreshLayout swInicio;
     private ListView lvProductos;
@@ -41,6 +45,10 @@ public class ProductosPorCategoria extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.producto_categoria_toolbar);
         setSupportActionBar(toolbar);
+
+        //Obtengo el id de usuario
+        prefs = getSharedPreferences("inusualapp", MODE_PRIVATE);
+        apiKey = prefs.getString("key", null);
 
         //Obtengo la categoria que se seleccionó
         categoria = getIntent().getStringExtra("categoria");
@@ -86,8 +94,8 @@ public class ProductosPorCategoria extends AppCompatActivity {
 
         peticionServ = new StringRequest(
                 Request.Method.GET,
-                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/productos/" +
-                        "listaProductos?category=" + categoria,
+                "http://dtai.uteq.edu.mx/~crupal192/AWOS/inusual-souvenirs/webServices/" +
+                        "listaProductos?category=" + categoria + "&key=" + apiKey,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
